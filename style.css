@@ -216,3 +216,29 @@ h2 { font-size: clamp(34px, 3vw, 42px); line-height: 1.16; letter-spacing: -1px;
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+/* SCROLLING PORTFOLIO */
+.work-controls { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:16px; }
+.work-controls[hidden] { display:none; }
+.work-controls > span { font-size:12px; color:var(--muted); }
+.work-buttons { display:flex; gap:8px; }
+.work-buttons button { display:grid; place-items:center; width:42px; height:42px; padding:0; background:var(--white); color:var(--ink); border:1px solid var(--silver); cursor:pointer; transition:background .2s,color .2s; }
+.work-buttons button:hover:not(:disabled) { background:var(--denim); color:var(--white); }
+.work-buttons button:disabled { opacity:.35; cursor:default; }
+.work-buttons svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.work-track { --work-gap:24px; display:flex; gap:var(--work-gap); overflow-x:auto; scroll-snap-type:x mandatory; overscroll-behavior-x:contain; scrollbar-width:thin; scrollbar-color:var(--orange) var(--line); padding-bottom:16px; }
+.work-track:focus-visible { outline:2px solid var(--orange); outline-offset:6px; }
+.work-slide { flex:0 0 calc((100% - 2 * var(--work-gap)) / 3); min-width:0; margin:0; scroll-snap-align:start; }
+.work-slide a { display:block; }
+.work-slide img { width:100%; height:310px; object-fit:cover; border:1px solid var(--line); transition:filter .2s; }
+.work-slide a:hover img { filter:brightness(1.06); }
+.work-slide figcaption { margin-top:12px; font:19px/1.4 var(--serif); }
+.work-hint { margin:12px 0 0; color:var(--muted); font-size:11px; }
+@media(max-width:1050px) { .work-slide { flex-basis:calc((100% - var(--work-gap)) / 2); } }
+@media(max-width:760px) {
+  .work-track { --work-gap:16px; }
+  .work-slide { flex-basis:86%; }
+  .work-slide img { height:350px; }
+  .work-slide figcaption { font-size:18px; }
+}
+@media(prefers-reduced-motion:reduce) { .work-buttons button,.work-slide img { transition:none; } }
